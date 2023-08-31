@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullname": "Thammakut Chotchuang",
+      "email": "a@test.com",
+      "password": "1q2w3e4r",
+      "gender": "Female"
+    },
+    {
+      "id": 2,
+      "fullname": "bnjm12",
+      "email": "hkjasd@gmail.com",
+      "password": "sdfsdfsdf2",
+      "gender": "Female"
+    },
+    {
+      "id": 3,
+      "fullname": "yj",
+      "email": "hnghn@gmail.com",
+      "password": "sdf33asd",
+      "gender": "Female"
+    }
+  ]
+}
