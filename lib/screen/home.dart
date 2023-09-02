@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/models/config.dart';
 import 'login.dart';
 import 'package:flutter_application_1/models/user.dart';
-import 'editInfo.dart';
+import 'cart.dart';
 import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {

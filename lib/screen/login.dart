@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_application_1/models/config.dart';
 import 'package:flutter_application_1/models/user.dart';
-import 'userInfo.dart';
+import 'gameInfo.dart';
 import 'home.dart';
 import 'package:http/http.dart' as http;
 
