@@ -1,3 +1,3 @@
-# flutter_application_1
+# App Nintendo
 
 A new Flutter project.
