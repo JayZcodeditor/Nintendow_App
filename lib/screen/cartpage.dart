@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/cart.dart';
+import 'package:flutter_application_1/models/app_config.dart';
+import 'package:flutter_application_1/models/users.dart';
+
+
 
 class CartPage extends StatelessWidget {
-  final List<Map<String, dynamic>> cartItems; // List of items in the shopping cart
+  static const String routeName = '/cart';
 
-  CartPage({required this.cartItems});
+  final Users user;
+
+  CartPage({required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -11,59 +18,30 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Shopping Cart'),
       ),
-      body: ListView.builder(
-        itemCount: cartItems.length,
-        itemBuilder: (context, index) {
-          final cartItem = cartItems[index];
-          return ListTile(
-            leading: Image.network(
-              cartItem['Game_picture'], // URL to the game's picture
-              width: 80,
-              height: 80,
-              fit: BoxFit.cover,
-            ),
-            title: Text(cartItem['Game_title']),
-            subtitle: Text('Price: \$${cartItem['Game_price']}'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () {
-                    // Implement logic to decrease item quantity in the cart
-                  },
-                ),
-                Text(cartItem['total']),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    // Implement logic to increase item quantity in the cart
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Total: \$${calculateTotal(cartItems)}', // Implement a function to calculate the total price
-              style: TextStyle(fontSize: 20),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Implement logic to proceed to checkout
-                Navigator.of(context).pushNamed('/receipt');
+      body: user.cart.isEmpty
+          ? Center(
+              child: Text('Your cart is empty.'),
+            )
+          : ListView.builder(
+              itemCount: user.cart.length,
+              itemBuilder: (BuildContext context, int index) {
+                Cart cartItem = user.cart[index];
+                return ListTile(
+                  leading: Image.network(cartItem.gamePicture ?? ''),
+                  title: Text(cartItem.gameTitle ?? 'Unknown Title'),
+                  subtitle: Text('Price: \$${cartItem.gamePrice ?? '0.00'}'),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      // Add logic here to remove the item from the cart
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Removed from Cart')),
+                      );
+                    },
+                  ),
+                );
               },
-              child: Text('Proceed to Checkout'),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

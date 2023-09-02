@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatelessWidget {
-  final List<Map<String, dynamic>> games; // You should populate this list with game data
-
-  HomePage({required this.games});
+  static const String routeName = '/'; // Define a route name for the page
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nintendo Game Store'),
+        title: Text('Home Page'),
       ),
-      body: ListView.builder(
-        itemCount: games.length,
-        itemBuilder: (context, index) {
-          final game = games[index];
-          return ListTile(
-            title: Text(game['title']),
-            subtitle: Text('Type: ${game['type']}'),
-            trailing: Text('\$${game['price']}'),
-            onTap: () {
-              // Navigate to the game details page (InfoGame) passing the game data
-              Navigator.of(context).pushNamed('/infoGame', arguments: game);
-            },
-          );
-        },
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Welcome to the Nintendo Game Store!',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // You can add navigation logic here
+                // For example, navigate to the game details page
+                Navigator.pushNamed(context, '/game');
+              },
+              child: Text('Browse Games'),
+            ),
+          ],
+        ),
       ),
     );
   }

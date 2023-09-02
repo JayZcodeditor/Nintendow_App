@@ -1,38 +1,139 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter_application_1/models/app_config.dart';
+import 'package:flutter_application_1/models/users.dart';
+import 'homepage.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/widgets.dart';
 
-class LoginPage extends StatelessWidget {
+
+class Login extends StatefulWidget {
+    static const routeName = "/login";
+  const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+
+  final _formkey = GlobalKey<FormState>();
+  Users user = Users();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
+      appBar: AppBar(title: Text("Login Page"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 20),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true, // Hide the password text
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Implement login logic here
-                // You can navigate to the home page upon successful login
-                Navigator.of(context).pushReplacementNamed('/home');
-              },
-              child: Text('Login'),
-            ),
-          ],
+      body: Container(
+        margin: EdgeInsets.all(10.0),
+        child: Form(
+          key: _formkey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              emailInputField(),
+              passwordInputField(),
+              SizedBox(height: 10.0,),
+              Row(
+                children: [
+                  submitButton(),
+                  SizedBox(width: 10.0,),
+                  backButton(),
+                  SizedBox(width: 10.0,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
+
+  Widget emailInputField() {
+    return TextFormField(
+      initialValue: "a@test.com",
+      decoration: InputDecoration(
+        labelText: "Email:",
+        icon: Icon(Icons.email)),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "This field is required";
+        }
+        if (!EmailValidator.validate(value)){
+          return "It is not email format";
+        }
+        return null;
+      },
+      onSaved: (newValue) => user.email = newValue,
+    );
+  }
+
+  Widget passwordInputField() {
+    return TextFormField(
+      initialValue: "1q2w3e4r",
+      obscureText: true,
+      decoration: InputDecoration(
+        labelText: "Password:",
+        icon: Icon(Icons.lock)),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "This field is required";
+        }
+        return null;
+      },
+      onSaved: (newValue) => user.password = newValue,
+    );
+  }
+
+  Widget submitButton() {
+    return ElevatedButton(
+      onPressed: () {
+        if (_formkey.currentState!.validate()) {
+          _formkey.currentState!.save();
+          print(user.toJson().toString());
+          login(user);
+        }
+      },
+      child: Text("Login"),
+    );
+  }
+
+  Widget backButton() {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pop(context); // Navigate back to the previous screen
+      },
+      child: Text("Back"),
+    );
+  }
+
+Future<void> login(Users user) async {
+  try {
+    var params = {"email": user.email, "password": user.password};
+    var url = Uri.http(AppConfig.server, "users", params);
+    var resp = await http.get(url);
+
+    if (resp.statusCode == 200) {
+      List<Users> login_result = usersFromJson(resp.body);
+
+      if (login_result.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Username or password invalid")),
+        );
+      } else {
+        AppConfig.login = login_result[0];
+        Navigator.pushReplacementNamed(context, HomePage.routeName);
+      }
+    } else {
+      print("Failed to load data from the server");
+    }
+  } catch (e) {
+    print("Error during login: $e");
+  }
+}
+
+
+
 }

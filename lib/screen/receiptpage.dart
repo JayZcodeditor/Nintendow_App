@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/users.dart';
 
 class ReceiptPage extends StatelessWidget {
-  final List<Map<String, dynamic>> purchasedItems; // List of purchased items
-  final double total; // Total amount spent
+  static const String routeName = '/receipt';
 
-  ReceiptPage({required this.purchasedItems, required this.total});
+  final Users user;
+
+  ReceiptPage({required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Receipt'),
+        title: Text('Order Receipt'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,30 +20,58 @@ class ReceiptPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Thank you for your purchase!',
+              'Order Summary',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text('Transaction Date: ${DateTime.now().toString()}'),
-            SizedBox(height: 20),
-            Text('Purchased Items:'),
+            SizedBox(height: 16),
+            Text(
+              'Order Date: ${DateTime.now().toLocal()}',
+              style: TextStyle(fontSize: 16),
+            ),
+            Text(
+              'Order Number: ${generateOrderNumber()}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Items:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: purchasedItems.length,
+              itemCount: user.cart.length,
               itemBuilder: (context, index) {
-                final item = purchasedItems[index];
+                final cartItem = user.cart[index];
                 return ListTile(
-                  title: Text(item['Game_title']),
-                  subtitle: Text('Price: \$${item['Game_price']}'),
-                  trailing: Text('Quantity: ${item['total']}'),
+                  title: Text(cartItem.gameTitle ?? 'Unknown Title'),
+                  subtitle: Text('Price: \$${cartItem.gamePrice ?? '0.00'}'),
                 );
               },
             ),
-            SizedBox(height: 20),
-            Text('Total Amount Spent: \$${total.toStringAsFixed(2)}'),
+            SizedBox(height: 16),
+            Text(
+              'Total: \$${calculateTotal()}',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  String generateOrderNumber() {
+    // Implement logic to generate a unique order number
+    // You can use date and time, or any other method
+    return 'ORD-${DateTime.now().millisecondsSinceEpoch}';
+  }
+
+  double calculateTotal() {
+    double total = 0.0;
+    for (final cartItem in user.cart) {
+      final price = double.tryParse(cartItem.gamePrice ?? '0.00') ?? 0.0;
+      total += price;
+    }
+    return total;
   }
 }
