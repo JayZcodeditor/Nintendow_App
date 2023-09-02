@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'screen/login.dart';
 import 'screen/homepage.dart';
 import 'screen/infogamepage.dart';
+
 //import 'screen/cartpage.dart';
 //import 'screen/receiptpage.dart';
 
@@ -28,21 +29,13 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/', // Specify the initial route
       routes: {
-        '/': (context) => HomePage(), // Login page as the initial route
+        '/home': (context) => HomePage(), // Login page as the initial route
         '/login': (context) => Login(), // Define other routes here
         '/game': (context) => InfoGamePage(),
         //'/cart': (context) => CartPage(),
         //'/receipt': (context) => ReceiptPage(),
       },
       home: Scaffold(
-        appBar: AppBar(
-          flexibleSpace: FlexibleSpaceBar(
-            title: Image.network(
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Nintendo.svg/2560px-Nintendo.svg.png',
-              height: 30, // Adjust the height as needed
-            ),
-          ),
-        ),
         body: _pages[0], // Initially, show the Login page
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
@@ -67,6 +60,8 @@ class MyApp extends StatelessWidget {
               label: 'Receipt',
             ),
           ],
+          selectedItemColor: Colors.black,        
+          unselectedItemColor: Colors.grey, // Set the color here
           onTap: (int index) {
             // Handle navigation when a bottom navigation item is tapped
             // Update the body to show the selected page

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class HomePage extends StatelessWidget {
-  static const String routeName = '/'; // Define a route name for the page
+  static const String routeName = '/home'; // Define a route name for the page
 
   @override
   Widget build(BuildContext context) {

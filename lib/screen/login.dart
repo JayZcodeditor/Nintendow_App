@@ -23,7 +23,10 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login Page"),
+      appBar: AppBar(title: Image.network(
+              'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
+              height: 120, // Adjust the height as needed
+            ),
       ),
       body: Container(
         margin: EdgeInsets.all(10.0),
@@ -32,6 +35,9 @@ class _LoginState extends State<Login> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 20.0,),
+              textHeader(),
+              SizedBox(height: 15.0,),
               emailInputField(),
               passwordInputField(),
               SizedBox(height: 10.0,),
@@ -50,6 +56,15 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+  Widget textHeader() {
+      return Center(
+        child: Text(
+          "Nintendo Account",
+          style: TextStyle(fontSize: 35), 
+        ),
+      );
+    }
 
   Widget emailInputField() {
     return TextFormField(

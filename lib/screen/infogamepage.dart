@@ -15,7 +15,7 @@ class InfoGamePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.network(
-              'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000063714/276a412988e07c4d55a2996c6d38abb408b464413b2dfeb44d2aa460b9f622e1',
+              'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
               width: 200, // Adjust the width as needed
             ),
             SizedBox(height: 20),
