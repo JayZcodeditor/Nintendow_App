@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'screen/login.dart';
 import 'screen/homepage.dart';
 import 'screen/infogamepage.dart';
@@ -19,10 +20,10 @@ class _MyAppState extends State<MyApp> {
 
   final List<Widget> _pages = [
     LoginPage(),
-    HomePage(),
-    InfoGamePage(),
-    CartPage(),
-    ReceiptPage(),
+    //HomePage(),
+    //InfoGamePage(),
+    //CartPage(),
+    //models(),
   ];
 
   void _onItemTapped(int index) {
