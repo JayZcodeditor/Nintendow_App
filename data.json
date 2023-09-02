@@ -1,25 +1,47 @@
 {
-  "users": [
-    {
+  "Users": [
+      {
       "id": 1,
-      "fullname": "Thammakut Chotchuang",
-      "email": "a@test.com",
-      "password": "1q2w3e4r",
-      "gender": "Female"
-    },
-    {
+      "email": "test@gmail.com",
+      "password": "1q2w3e4r"
+      },
+      {
       "id": 2,
-      "fullname": "bnjm12",
-      "email": "hkjasd@gmail.com",
-      "password": "sdfsdfsdf2",
-      "gender": "Female"
-    },
-    {
+      "email": "new@test.com",
+      "password": "1q2w3e4r"
+      },
+      {
       "id": 3,
-      "fullname": "yj",
-      "email": "hnghn@gmail.com",
-      "password": "sdf33asd",
-      "gender": "Female"
-    }
-  ]
+      "email": "sigup@gmail.com",
+      "password": "1q2w3e4r"
+      }
+  ],
+  "Game":[
+      {
+      "id":1,
+      "title": "Zelda",
+      "type": "simulator",
+      "price": "59.99",
+      "detail": "lorem",
+      "picture": "URL"
+      },
+      {
+      "id":2,
+      "title": "AnimalCrossing",
+      "type": "simulator",
+      "price": "69.99",
+      "detail": "lorem",
+      "picture": "URL"
+      }
+  ],
+  "Cart":[
+      {
+      "id":1,
+      "Game_id": 1,
+      "Game_title": "Zelda",
+      "Game_price": "59.99",
+      "Game_picture": "URL",
+      "total":"1"
+      }
+]
 }
