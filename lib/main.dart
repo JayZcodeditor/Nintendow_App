@@ -4,8 +4,6 @@ import 'screen/login.dart';
 import 'screen/homepage.dart';
 import 'screen/infogamepage.dart';
 
-
-
 void main() {
   runApp(MyApp());
 }
@@ -41,13 +39,6 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.red,
       ),
       initialRoute: '/', // Specify the initial route
-      routes: {
-        '/home': (context) => Home(), // Home page as the initial route
-        '/login': (context) => Login(), // Login page
-        '/game': (context) => InfoGamePage(), // Game page
-        //'/cart': (context) => CartPage(), // Cart page
-        //'/receipt': (context) => ReceiptPage(), // Receipt page
-      },
       home: Scaffold(
         body: _pages[_selectedIndex], // Show the selected page
         bottomNavigationBar: BottomNavigationBar(
@@ -57,20 +48,16 @@ class _MyAppState extends State<MyApp> {
               label: 'Login',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Image(
+                image: NetworkImage(
+                    "https://logos-download.com/wp-content/uploads/2021/02/Nintendo_Switch_Logo.png"),
+                height: 30,
+              ),
               label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.gamepad),
-              label: 'Game',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: 'Cart',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.receipt),
-              label: 'Receipt',
             ),
           ],
           selectedItemColor: Colors.black,

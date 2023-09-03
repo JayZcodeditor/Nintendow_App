@@ -18,8 +18,11 @@ class _InfoGamePageState extends State<InfoGamePage> {
     var imgUrl = game.picture;
     imgUrl ??= "";
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Game Details'),
+        appBar: AppBar(
+        title: Image.network(
+          'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
+          height: 120, // Adjust the height as needed
+        ),
       ),
       body: Container(
         color: Colors.grey, // Set the background color here

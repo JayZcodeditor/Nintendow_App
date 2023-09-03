@@ -30,8 +30,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
+        appBar: AppBar(
+        title: Image.network(
+          'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
+          height: 120, // Adjust the height as needed
+        ),
       ),
       body: mainBody, // Add the mainBody widget here
     );
