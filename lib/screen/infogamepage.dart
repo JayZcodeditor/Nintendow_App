@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'buttom.dart';
 
-class InfoGamePage extends StatelessWidget {
-  static const String routeName = '/game'; // Define a route name for the page
+class InfoGamePage extends StatefulWidget {
+  static const String routeName = '/game';
+
+  @override
+  _InfoGamePageState createState() => _InfoGamePageState();
+}
+
+class _InfoGamePageState extends State<InfoGamePage> {
+  int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +22,17 @@ class InfoGamePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.network(
-              'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
-              width: 200, // Adjust the width as needed
-            ),
-            SizedBox(height: 20),
             Text(
               'The Legend of Zelda™: Tears of the Kingdom',
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            Image.network(
+              'https://assets-prd.ignimgs.com/2022/09/14/zelda-tears-of-the-kingdom-button-2k-1663127818777.jpg',
+              width: 250,
+            ),
+            SizedBox(
+              height: 10,
             ),
             SizedBox(height: 10),
             Text(
@@ -50,6 +61,26 @@ class InfoGamePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, '/login');
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/home');
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/game');
+              break;
+          }
+        },
       ),
     );
   }

@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Nintendo Game Store',
       theme: ThemeData(
         primarySwatch: Colors.red,
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
               label: 'Receipt',
             ),
           ],
-          selectedItemColor: Colors.black,        
+          selectedItemColor: Colors.black,
           unselectedItemColor: Colors.grey, // Set the color here
           onTap: (int index) {
             // Handle navigation when a bottom navigation item is tapped
@@ -75,4 +76,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

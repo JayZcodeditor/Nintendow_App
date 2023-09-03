@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'buttom.dart';
 
-class HomePage extends StatelessWidget {
-  static const String routeName = '/home'; // Define a route name for the page
+class HomePage extends StatefulWidget {
+  static const String routeName = '/home';
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +19,6 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               'Welcome to the Nintendo Game Store!',
@@ -21,14 +27,32 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // You can add navigation logic here
-                // For example, navigate to the game details page
                 Navigator.pushNamed(context, '/game');
               },
               child: Text('Browse Games'),
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, '/login');
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/home');
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/game');
+              break;
+          }
+        },
       ),
     );
   }
