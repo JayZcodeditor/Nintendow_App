@@ -18,7 +18,8 @@ class _HomeState extends State<Home> {
   List<Games> _gamelist = [];
 
   Future<void> getGames() async {
-    var url = Uri.http(AppConfig.server, "Game"); // Change the endpoint to "games"
+    var url =
+        Uri.http(AppConfig.server, "Game"); // Change the endpoint to "games"
     var resp = await http.get(url);
     setState(() {
       _gamelist = gamesFromJson(resp.body);
@@ -51,7 +52,8 @@ class _HomeState extends State<Home> {
       itemBuilder: (context, index) {
         Games game = _gamelist[index];
         var imgUrl = game.picture;
-        imgUrl ??= "https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-20.jpg";
+        imgUrl ??=
+            "https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-20.jpg";
         return Dismissible(
           key: UniqueKey(),
           direction: DismissDirection.endToStart,
@@ -70,8 +72,8 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => InfoGamePage(), // Pass the game object as a parameter
-                  ),
+                      builder: (context) => InfoGamePage(),
+                      settings: RouteSettings(arguments: game)),
                 );
               },
             ),
