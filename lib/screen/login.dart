@@ -157,7 +157,8 @@ class _LoginState extends State<Login> {
           );
         } else {
           AppConfig.login = login_result[0];
-          Navigator.pushReplacementNamed(context, Home.routeName);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Home()));
         }
       } else {
         print("Failed to load data from the server");

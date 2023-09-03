@@ -18,7 +18,7 @@ class _InfoGamePageState extends State<InfoGamePage> {
     var imgUrl = game.picture;
     imgUrl ??= "";
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Image.network(
           'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
           height: 120, // Adjust the height as needed
@@ -51,13 +51,20 @@ class _InfoGamePageState extends State<InfoGamePage> {
                   ),
                   SizedBox(height: 10),
                   Text(
+                    "Type",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
+                  ),
+                  Text(
                     '${game.type}',
                     style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(height: 20),
                   Text(
                     '${game.detail}',
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                   ),
                   SizedBox(height: 20),
                   Text(

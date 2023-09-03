@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Image.network(
           'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
           height: 120, // Adjust the height as needed
@@ -48,6 +48,11 @@ class _HomeState extends State<Home> {
       getGames();
     }
   }
+
+  // Widget TopGame(List<Games> _gamelist){
+  //   return MaterialApp(
+  //     theme: ThemeData(),
+  //   );
 
   Widget showGames(List<Games> _gamelist) {
     return ListView.builder(
@@ -70,7 +75,7 @@ class _HomeState extends State<Home> {
             child: ListTile(
               leading: Image.network(imgUrl),
               title: Text("${game.title}"),
-              subtitle: Text("${game.release}"),
+              subtitle: Text("Release: ${game.release}"),
               onTap: () {
                 Navigator.push(
                   context,
