@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_application_1/models/app_config.dart';
 import 'package:flutter_application_1/models/users.dart';
-import 'homepage.dart';
+import 'package:flutter_application_1/screen/homepage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/widgets.dart';
 
@@ -157,7 +157,7 @@ class _LoginState extends State<Login> {
           );
         } else {
           AppConfig.login = login_result[0];
-          Navigator.pushReplacementNamed(context, HomePage.routeName);
+          Navigator.pushReplacementNamed(context, Home.routeName);
         }
       } else {
         print("Failed to load data from the server");

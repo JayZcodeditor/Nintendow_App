@@ -10,8 +10,7 @@ class InfoGamePage extends StatefulWidget {
 }
 
 class _InfoGamePageState extends State<InfoGamePage> {
-  int _currentIndex = 2;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

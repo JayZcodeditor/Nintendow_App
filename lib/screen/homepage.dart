@@ -3,7 +3,6 @@ import 'package:flutter_application_1/models/app_config.dart';
 import 'package:flutter_application_1/models/users.dart';
 import 'package:flutter_application_1/models/games.dart';
 import 'package:flutter_application_1/screen/infogamepage.dart';
-import 'package:flutter_application_1/screen/login.dart';
 import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
