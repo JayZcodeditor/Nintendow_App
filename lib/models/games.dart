@@ -11,7 +11,8 @@ String gamesToJson(List<Games> data) => json.encode(List<dynamic>.from(data.map(
 class Games {
     int? id;
     String? title;
-    Type? type;
+    String? type;
+    String? release;
     double? price;
     String? detail;
     String? picture;
@@ -20,6 +21,7 @@ class Games {
         this.id,
         this.title,
         this.type,
+        this.release,
         this.price,
         this.detail,
         this.picture,
@@ -28,7 +30,8 @@ class Games {
     factory Games.fromJson(Map<String, dynamic> json) => Games(
         id: json["id"],
         title: json["title"],
-        type: typeValues.map[json["type"]]!,
+        type: json["type"],
+        release: json["release"],
         price: json["price"]?.toDouble(),
         detail: json["detail"],
         picture: json["picture"],
@@ -37,33 +40,10 @@ class Games {
     Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "type": typeValues.reverse[type],
+        "type": type,
+        "release": release,
         "price": price,
         "detail": detail,
         "picture": picture,
     };
-}
-
-enum Type {
-    ADVENTURE,
-    SIMULATION,
-    SPORTS
-}
-
-final typeValues = EnumValues({
-    "Adventure": Type.ADVENTURE,
-    "Simulation": Type.SIMULATION,
-    "Sports": Type.SPORTS
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
 }

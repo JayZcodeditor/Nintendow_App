@@ -50,12 +50,11 @@ class _HomeState extends State<Home> {
       itemCount: _gamelist.length,
       itemBuilder: (context, index) {
         Games game = _gamelist[index];
+        var imgUrl = game.picture;
+        imgUrl ??= "https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-20.jpg";
         return Dismissible(
           key: UniqueKey(),
           direction: DismissDirection.endToStart,
-          onDismissed: (direction) {
-            // Handle dismiss action if needed
-          },
           background: Container(
             color: Colors.red,
             margin: EdgeInsets.symmetric(horizontal: 15),
@@ -64,7 +63,9 @@ class _HomeState extends State<Home> {
           ),
           child: Card(
             child: ListTile(
+              leading: Image.network(imgUrl),
               title: Text("${game.title}"),
+              subtitle: Text("${game.release}"),
               onTap: () {
                 Navigator.push(
                   context,
