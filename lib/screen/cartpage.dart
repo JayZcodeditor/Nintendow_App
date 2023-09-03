@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/cart.dart';
 import 'package:flutter_application_1/models/app_config.dart';
 import 'package:flutter_application_1/models/users.dart';
+import 'package:flutter_application_1/models/cart.dart';
 
 
 
 class CartPage extends StatelessWidget {
   static const String routeName = '/cart';
 
-  final Users user;
+  final Cart cart;
 
   CartPage({required this.user});
 
@@ -18,14 +19,14 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Shopping Cart'),
       ),
-      body: user.cart.isEmpty
+      body: cart.isEmpty
           ? Center(
               child: Text('Your cart is empty.'),
             )
           : ListView.builder(
-              itemCount: user.cart.length,
+              itemCount: cart.length,
               itemBuilder: (BuildContext context, int index) {
-                Cart cartItem = user.cart[index];
+                Cart cartItem = cart.cart[index];
                 return ListTile(
                   leading: Image.network(cartItem.gamePicture ?? ''),
                   title: Text(cartItem.gameTitle ?? 'Unknown Title'),

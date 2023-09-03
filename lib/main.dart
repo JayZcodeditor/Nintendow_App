@@ -4,21 +4,33 @@ import 'screen/login.dart';
 import 'screen/homepage.dart';
 import 'screen/infogamepage.dart';
 
-//import 'screen/cartpage.dart';
-//import 'screen/receiptpage.dart';
+
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+
   final List<Widget> _pages = [
     Login(),
-    HomePage(),
+    Home(),
     InfoGamePage(),
     //CartPage(),
     //ReceiptPage(),
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +42,14 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/', // Specify the initial route
       routes: {
-        '/home': (context) => HomePage(), // Login page as the initial route
-        '/login': (context) => Login(), // Define other routes here
-        '/game': (context) => InfoGamePage(),
-        //'/cart': (context) => CartPage(),
-        //'/receipt': (context) => ReceiptPage(),
+        '/home': (context) => Home(), // Home page as the initial route
+        '/login': (context) => Login(), // Login page
+        '/game': (context) => InfoGamePage(), // Game page
+        //'/cart': (context) => CartPage(), // Cart page
+        //'/receipt': (context) => ReceiptPage(), // Receipt page
       },
       home: Scaffold(
-        body: _pages[0], // Initially, show the Login page
+        body: _pages[_selectedIndex], // Show the selected page
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -63,14 +75,8 @@ class MyApp extends StatelessWidget {
           ],
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.grey, // Set the color here
-          onTap: (int index) {
-            // Handle navigation when a bottom navigation item is tapped
-            // Update the body to show the selected page
-            // You can also add more logic here as needed
-            Navigator.of(context).pushReplacementNamed(
-              index == 0 ? '/' : '/home', // Use the defined routes
-            );
-          },
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
         ),
       ),
     );

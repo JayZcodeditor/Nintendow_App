@@ -1,59 +1,83 @@
 import 'package:flutter/material.dart';
-import 'buttom.dart';
+import 'package:flutter_application_1/models/app_config.dart';
+import 'package:flutter_application_1/models/users.dart';
+import 'package:flutter_application_1/models/games.dart';
+import 'package:flutter_application_1/screen/infogamepage.dart';
+import 'package:flutter_application_1/screen/login.dart';
+import 'package:http/http.dart' as http;
 
-class HomePage extends StatefulWidget {
-  static const String routeName = '/home';
+class Home extends StatefulWidget {
+  static const routeName = "/";
+  const Home({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int _currentIndex = 1;
+class _HomeState extends State<Home> {
+  Widget mainBody = Container();
+  List<Games> _gamelist = [];
+
+  Future<void> getGames() async {
+    var url = Uri.http(AppConfig.server, "Game"); // Change the endpoint to "games"
+    var resp = await http.get(url);
+    setState(() {
+      _gamelist = gamesFromJson(resp.body);
+      mainBody = showGames(_gamelist);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text("Home"),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Text(
-              'Welcome to the Nintendo Game Store!',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/game');
-              },
-              child: Text('Browse Games'),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
+      body: mainBody, // Add the mainBody widget here
+    );
+  }
 
-          switch (index) {
-            case 0:
-              Navigator.pushNamed(context, '/login');
-              break;
-            case 1:
-              Navigator.pushNamed(context, '/home');
-              break;
-            case 2:
-              Navigator.pushNamed(context, '/game');
-              break;
-          }
-        },
-      ),
+  @override
+  void initState() {
+    super.initState();
+    Users user = AppConfig.login;
+    if (user.id != null) {
+      getGames();
+    }
+  }
+
+  Widget showGames(List<Games> _gamelist) {
+    return ListView.builder(
+      itemCount: _gamelist.length,
+      itemBuilder: (context, index) {
+        Games game = _gamelist[index];
+        return Dismissible(
+          key: UniqueKey(),
+          direction: DismissDirection.endToStart,
+          onDismissed: (direction) {
+            // Handle dismiss action if needed
+          },
+          background: Container(
+            color: Colors.red,
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            alignment: Alignment.centerRight,
+            child: Icon(Icons.delete, color: Colors.white),
+          ),
+          child: Card(
+            child: ListTile(
+              title: Text("${game.title}"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => InfoGamePage(), // Pass the game object as a parameter
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
