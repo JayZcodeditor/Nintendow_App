@@ -1,48 +1,71 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/models/cart.dart';
-// import 'package:flutter_application_1/models/app_config.dart';
-// import 'package:flutter_application_1/models/users.dart';
-// import 'package:flutter_application_1/models/cart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/cart.dart';
+import 'package:flutter_application_1/models/app_config.dart';
+import 'package:flutter_application_1/models/users.dart';
+import 'package:http/http.dart' as http;
 
+class CartPage extends StatefulWidget {
+  static const routeName = "/cart";
+  const CartPage({super.key});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
 
-// class CartPage extends StatelessWidget {
-//   static const String routeName = '/cart';
+class _CartPageState extends State<CartPage> {
+  Widget mainBody = Container();
+  List<Cart> _cartList = [];
 
-//   final Cart cart;
+  Future<void> getCart() async {
+    var url = Uri.http(AppConfig.server, "Cart");
+    var resp = await http.get(url);
+    setState(() {
+      _cartList = cartFromJson(resp.body);
+      mainBody = showCart(_cartList);
+    });
+  }
 
-//   CartPage({required this.user});
+  @override
+  void initState() {
+    super.initState();
+    Users user = AppConfig.login;
+    if (user.id != null) {
+      getCart();
+    }
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Shopping Cart'),
-//       ),
-//       body: cart.isEmpty
-//           ? Center(
-//               child: Text('Your cart is empty.'),
-//             )
-//           : ListView.builder(
-//               itemCount: cart.length,
-//               itemBuilder: (BuildContext context, int index) {
-//                 Cart cartItem = cart.cart[index];
-//                 return ListTile(
-//                   leading: Image.network(cartItem.gamePicture ?? ''),
-//                   title: Text(cartItem.gameTitle ?? 'Unknown Title'),
-//                   subtitle: Text('Price: \$${cartItem.gamePrice ?? '0.00'}'),
-//                   trailing: IconButton(
-//                     icon: Icon(Icons.delete),
-//                     onPressed: () {
-//                       // Add logic here to remove the item from the cart
-//                       ScaffoldMessenger.of(context).showSnackBar(
-//                         SnackBar(content: Text('Removed from Cart')),
-//                       );
-//                     },
-//                   ),
-//                 );
-//               },
-//             ),
-//     );
-//   }
-// }
+  Widget showCart(List<Cart> _cartList) {
+    return ListView.builder(
+      itemCount: _cartList.length,
+      itemBuilder: (context, index) {
+        Cart cart = _cartList[index];
+        return Dismissible(
+          key: UniqueKey(),
+          direction: DismissDirection.endToStart,
+          background: Container(
+            color: Colors.red,
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            alignment: Alignment.centerRight,
+            child: Icon(Icons.delete, color: Colors.white),
+          ),
+          child: Card(
+            child: ListTile(
+              title: Text("${cart.id}"),
+              subtitle: Text("${cart.stitle}"),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Cart Page"),
+      ),
+      body: mainBody,
+    );
+  }
+}
