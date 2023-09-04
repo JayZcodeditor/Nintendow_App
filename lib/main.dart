@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'screen/login.dart';
 import 'screen/homepage.dart';
+import 'screen/cartpage.dart';
 // import 'screen/receiptpage.dart';
 
 void main() {
@@ -66,7 +67,7 @@ class _MainAppState extends State<MainApp> {
   final List<Widget> _pages = [
     Home(),
     // ReceiptPage(),
-    // CartPage(),
+    CartPage(),
   ];
 
   void _onItemTapped(int index) {

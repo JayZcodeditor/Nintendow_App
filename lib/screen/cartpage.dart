@@ -28,10 +28,7 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     super.initState();
-    Users user = AppConfig.login;
-    if (user.id != null) {
-      getCart();
-    }
+    getCart();
   }
 
   Widget showCart(List<Cart> _cartList) {
