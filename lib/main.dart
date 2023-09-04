@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: fals,
       title: 'Nintendo Game Store',
       theme: ThemeData(
         primarySwatch: Colors.red,
