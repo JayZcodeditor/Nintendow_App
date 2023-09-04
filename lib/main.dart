@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'screen/login.dart';
 import 'screen/homepage.dart';
-import 'screen/infogamepage.dart';
+// import 'screen/receiptpage.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,19 +14,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
+  bool _isLoggedIn = false;
+  int? _userId; // Add a userId field
 
-  final List<Widget> _pages = [
-    Login(),
-    Home(),
-    InfoGamePage(),
-    //CartPage(),
-    //ReceiptPage(),
-  ];
-
-  void _onItemTapped(int index) {
+  void _login(int userId) {
+    // Simulate a successful login and store the user's ID
     setState(() {
-      _selectedIndex = index;
+      _isLoggedIn = true;
+      _userId = userId; // Store the user's ID
     });
   }
 
@@ -38,33 +33,71 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: '/', // Specify the initial route
-      home: Scaffold(
-        body: _pages[_selectedIndex], // Show the selected page
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.login),
-              label: 'Login',
-            ),
-            BottomNavigationBarItem(
-              icon: Image(
-                image: NetworkImage(
-                    "https://logos-download.com/wp-content/uploads/2021/02/Nintendo_Switch_Logo.png"),
-                height: 30,
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: 'Cart',
-            ),
-          ],
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey, // Set the color here
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-        ),
+      home: _isLoggedIn
+          ? MainApp(
+              userId: _userId, // Provide the userId here
+              logoutCallback: () {
+                // Callback to logout and reset the _isLoggedIn state
+                setState(() {
+                  _isLoggedIn = false;
+                  _userId = null; // Reset the user's ID
+                });
+              },
+            )
+          : Login(callbackLogin: _login),
+    );
+  }
+}
+
+class MainApp extends StatefulWidget {
+  final int? userId;
+  final VoidCallback logoutCallback; // Callback to logout
+
+  MainApp({required this.userId, required this.logoutCallback, Key? key})
+      : super(key: key);
+
+  @override
+  _MainAppState createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    Home(),
+    // ReceiptPage(),
+    // CartPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt),
+            label: 'Receipt',
+          ),
+        ],
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

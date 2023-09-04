@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_application_1/models/app_config.dart';
 import 'package:flutter_application_1/models/users.dart';
 import 'package:flutter_application_1/screen/homepage.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/widgets.dart';
 
 class Login extends StatefulWidget {
   static const routeName = "/login";
-  const Login({super.key});
+  final Function(int) callbackLogin; // Change the callback type to accept an integer
+
+  Login({required this.callbackLogin, Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  final _formkey = GlobalKey<FormState>();
+  var _formkey = GlobalKey<FormState>();
   Users user = Users();
 
   @override
@@ -25,8 +27,7 @@ class _LoginState extends State<Login> {
         title: Image.network(
           'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
           height: 120, // Adjust the height as needed
-        ),
-      ),
+        )),
       body: Container(
         margin: EdgeInsets.all(10.0),
         child: Form(
@@ -84,7 +85,7 @@ class _LoginState extends State<Login> {
           return "This field is required";
         }
         if (!EmailValidator.validate(value)) {
-          return "It is not email format";
+          return "It is not an email format";
         }
         return null;
       },
@@ -133,15 +134,6 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget backButton() {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pop(context); // Navigate back to the previous screen
-      },
-      child: Text("Back"),
-    );
-  }
-
   Future<void> login(Users user) async {
     try {
       var params = {"email": user.email, "password": user.password};
@@ -156,8 +148,12 @@ class _LoginState extends State<Login> {
             SnackBar(content: Text("Username or password invalid")),
           );
         } else {
-          AppConfig.login = login_result[0];
-          Navigator.pushReplacementNamed(context, Home.routeName);
+          // Store the user's ID
+          int userId = login_result[0].id ?? 0; // Replace 0 with a default value if id is null
+
+          // Notify the parent widget about successful login with the user's ID
+          widget.callbackLogin(userId);
+          Navigator.pushNamed(context, Home.routeName);
         }
       } else {
         print("Failed to load data from the server");

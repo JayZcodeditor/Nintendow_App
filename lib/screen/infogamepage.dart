@@ -18,7 +18,7 @@ class _InfoGamePageState extends State<InfoGamePage> {
     var imgUrl = game.picture;
     imgUrl ??= "";
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Image.network(
           'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
           height: 120, // Adjust the height as needed
@@ -27,53 +27,76 @@ class _InfoGamePageState extends State<InfoGamePage> {
       body: Container(
         color: Colors.grey, // Set the background color here
         child: Center(
-          child: Card(
-            elevation: 4, // You can adjust the elevation as needed.
-            margin: EdgeInsets.all(16), // You can adjust the margin as needed.
-            child: Padding(
-              padding: const EdgeInsets.all(
-                  16.0), // You can adjust the padding as needed.
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    '${game.title}',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 20),
-                  Image.network(
-                    imgUrl,
-                    width: 250,
-                    height: 150,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '${game.type}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    '${game.detail}',
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    '\$${game.price}',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Added to Cart')),
-                      );
-                    },
-                    child: Text('Add to Cart'),
-                  ),
-                ],
+          child: SingleChildScrollView(
+            child: Card(
+              elevation: 4, // You can adjust the elevation as needed.
+              margin: EdgeInsets.all(8), // You can adjust the margin as needed.
+              child: Padding(
+                padding: const EdgeInsets.all(
+                    16.0), // You can adjust the padding as needed.
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment
+                      .start, // Align all elements to the left
+                  children: <Widget>[
+                    Text(
+                      '${game.title}',
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                        height: 10), // Add some space between title and image
+                    Image.network(
+                      imgUrl,
+                      height: 260, // Set the fixed height
+                    ),
+                    SizedBox(
+                        height: 20), // Add some space between image and type
+                    Text(
+                      '${game.type}',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    SizedBox(
+                        height: 20), // Add some space between type and detail
+                    Text(
+                      '${game.detail}',
+                    ),
+                    SizedBox(
+                        height: 20), // Add some space between detail and price
+                    Text(
+                      '\$${game.price}',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                        height: 10), // Add some space between price and buttons
+                    Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.start, // Align buttons to the left
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Added to Cart')),
+                            );
+                          },
+                          child: Text('Add to Cart'),
+                        ),
+                        SizedBox(width: 10), // Add some space between buttons
+                        ElevatedButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Buy Now')),
+                            );
+                            // Add any additional logic for the "Buy Now" action here
+                          },
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.green),
+                          child: Text('Buy Now'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

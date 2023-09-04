@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/models/app_config.dart';
-import 'package:flutter_application_1/models/users.dart';
 import 'package:flutter_application_1/models/games.dart';
 import 'package:flutter_application_1/screen/infogamepage.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_application_1/screen/login.dart';
 
 class Home extends StatefulWidget {
-  static const routeName = "/";
+  static const routeName = "/home";
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Widget mainBody = Container();
   List<Games> _gamelist = [];
+  String? selectedGenre; // Variable to store the selected genre
 
   Future<void> getGames() async {
     var url =
@@ -30,11 +31,43 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Image.network(
           'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
           height: 120, // Adjust the height as needed
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Confirm Logout"),
+                    content: Text("Are you sure you want to log out?"),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text("Cancel"),
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close the dialog
+                        },
+                      ),
+                      TextButton(
+                        child: Text("Logout"),
+                        onPressed: () {
+                          // Perform the logout action here
+                          Navigator.pushNamed(context, Login.routeName);
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            tooltip: 'Logout',
+          ),
+        ],
       ),
       body: mainBody, // Add the mainBody widget here
     );
@@ -43,46 +76,137 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    Users user = AppConfig.login;
-    if (user.id != null) {
-      getGames();
-    }
+    getGames();
   }
 
   Widget showGames(List<Games> _gamelist) {
-    return ListView.builder(
-      itemCount: _gamelist.length,
-      itemBuilder: (context, index) {
-        Games game = _gamelist[index];
-        var imgUrl = game.picture;
-        imgUrl ??=
-            "https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-20.jpg";
-        return Dismissible(
-          key: UniqueKey(),
-          direction: DismissDirection.endToStart,
-          background: Container(
-            color: Colors.red,
-            margin: EdgeInsets.symmetric(horizontal: 15),
-            alignment: Alignment.centerRight,
-            child: Icon(Icons.delete, color: Colors.white),
+    // Filter games by genre
+    final filteredGames = selectedGenre == null
+        ? _gamelist
+        : _gamelist.where((game) => game.type == selectedGenre).toList();
+
+    List<String> genres = [
+      'Adventure',
+      'Simulation',
+      'Sports',
+      'Fighting',
+      'Multiplayer',
+      'Role-Playing',
+    ];
+
+    return Column(
+      children: <Widget>[
+        Text(
+          'Trending Games',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        Container(
+          height: 200,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 5, // Display up to 5 top trending games
+            itemBuilder: (context, index) {
+              final game = _gamelist[index];
+              var imgtop =
+                  game.picture ?? "https://example.com/default-image.jpg";
+              return Card(
+                elevation: 4,
+                margin: EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Image.network(
+                      imgtop,
+                      height: 100, // Set the image height
+                      width: 100, // Set the image width
+                      fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "${game.title}",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
-          child: Card(
-            child: ListTile(
-              leading: Image.network(imgUrl),
-              title: Text("${game.title}"),
-              subtitle: Text("${game.release}"),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => InfoGamePage(),
-                      settings: RouteSettings(arguments: game)),
-                );
-              },
+        ),
+        SizedBox(height: 20),
+        // Genre selection dropdown
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DropdownButtonFormField<String>(
+            decoration: InputDecoration(
+              labelText: 'Sort by Genre',
+              border: OutlineInputBorder(),
             ),
+            value: selectedGenre,
+            onChanged: (value) {
+              // Handle genre selection here
+              setState(() {
+                selectedGenre = value;
+              });
+            },
+            items: genres.map((String genre) {
+              return DropdownMenuItem<String>(
+                value: genre,
+                child: Text(genre),
+              );
+            }).toList(),
           ),
-        );
-      },
+        ),
+        // List of games filtered by genre
+        Expanded(
+          child: ListView.builder(
+            itemCount: filteredGames.length,
+            itemBuilder: (context, index) {
+              Games game = filteredGames[index];
+              var imgUrl =
+                  game.picture ?? "https://example.com/default-image.jpg";
+              return Dismissible(
+                key: UniqueKey(),
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  color: Colors.red,
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  alignment: Alignment.centerRight,
+                  child: Icon(Icons.delete, color: Colors.white),
+                ),
+                child: Card(
+                  child: ListTile(
+                    leading: Image.network(
+                      imgUrl,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(
+                      "${game.title}",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    subtitle: Text(
+                      "${game.release} - ${game.type}",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InfoGamePage(),
+                          settings: RouteSettings(arguments: game),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
