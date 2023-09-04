@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/app_config.dart';
 import 'package:flutter_application_1/models/games.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 
 class InfoGamePage extends StatefulWidget {
   static const String routeName = '/game';
@@ -11,6 +15,29 @@ class InfoGamePage extends StatefulWidget {
 }
 
 class _InfoGamePageState extends State<InfoGamePage> {
+  Future<void> addgame(String title, String price, String picture, String type,
+      String release) async {
+    var url = Uri.http(AppConfig.server, "Cart");
+    Map<String, dynamic> gameData = {
+      "stitle": title,
+      "stype": type,
+      "sprice": price,
+      "srelease": release,
+      "spicture": picture,
+    };
+    var resp = await http.post(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(gameData));
+    var rs = gamesFromJson("[${resp.body}]");
+
+    if (rs.length == 1) {
+      Navigator.pop(context, "refresh");
+    }
+    return;
+  }
+
   @override
   Widget build(BuildContext context) {
     final game = ModalRoute.of(context)!.settings.arguments as Games;
@@ -64,6 +91,8 @@ class _InfoGamePageState extends State<InfoGamePage> {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
+                      addgame("${game.title}", "${game.price}",
+                          "${game.picture}", "${game.type}", "${game.release}");
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Added to Cart')),
                       );

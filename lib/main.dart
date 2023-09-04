@@ -3,8 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'screen/login.dart';
 import 'screen/homepage.dart';
 import 'screen/infogamepage.dart';
-
-
+import 'screen/cartpage.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +21,7 @@ class _MyAppState extends State<MyApp> {
     Login(),
     Home(),
     InfoGamePage(),
-    //CartPage(),
+    CartPage(),
     //ReceiptPage(),
   ];
 
@@ -45,7 +44,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => Home(), // Home page as the initial route
         '/login': (context) => Login(), // Login page
         '/game': (context) => InfoGamePage(), // Game page
-        //'/cart': (context) => CartPage(), // Cart page
+        '/cart': (context) => CartPage(), // Cart page
         //'/receipt': (context) => ReceiptPage(), // Receipt page
       },
       home: Scaffold(
