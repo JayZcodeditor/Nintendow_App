@@ -96,16 +96,17 @@ class _HomeState extends State<Home> {
 
     return Column(
       children: <Widget>[
+        SizedBox(height: 10),
         Text(
           'Trending Games',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
-          height: 200,
+          height: 250,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 5, // Display up to 5 top trending games
+            itemCount: 5,
             itemBuilder: (context, index) {
               final game = _gamelist[index];
               var imgtop =
@@ -118,15 +119,25 @@ class _HomeState extends State<Home> {
                   children: <Widget>[
                     Image.network(
                       imgtop,
-                      height: 100, // Set the image height
-                      width: 100, // Set the image width
+                      height: 170, // Set the image height
+                      width: 300, // Set the image width
                       fit: BoxFit.cover,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "${game.title}",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "${game.release}-${game.type}",
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ],
@@ -167,40 +178,30 @@ class _HomeState extends State<Home> {
               Games game = filteredGames[index];
               var imgUrl =
                   game.picture ?? "https://example.com/default-image.jpg";
-              return Dismissible(
-                key: UniqueKey(),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  color: Colors.red,
-                  margin: EdgeInsets.symmetric(horizontal: 15),
-                  alignment: Alignment.centerRight,
-                  child: Icon(Icons.delete, color: Colors.white),
-                ),
-                child: Card(
-                  child: ListTile(
-                    leading: Image.network(
-                      imgUrl,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                    title: Text(
-                      "${game.title}",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    subtitle: Text(
-                      "${game.release} - ${game.type}",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => InfoGamePage(),
-                          settings: RouteSettings(arguments: game),
-                        ),
-                      );
-                    },
+              return Card(
+                child: ListTile(
+                  leading: Image.network(
+                    imgUrl,
+                    height: 150,
+                    fit: BoxFit.cover,
                   ),
+                  title: Text(
+                    "${game.title}",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  subtitle: Text(
+                    "${game.release} - ${game.type}",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InfoGamePage(),
+                        settings: RouteSettings(arguments: game),
+                      ),
+                    );
+                  },
                 ),
               );
             },

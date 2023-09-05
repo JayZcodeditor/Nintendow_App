@@ -47,10 +47,18 @@ class _CartPageState extends State<CartPage> {
           ),
           child: Card(
             child: ListTile(
-              title: Text("${cart.id}"),
-              subtitle: Text("${cart.stitle}"),
+              leading: Image.network("${cart.spicture}"),
+              title: Text("${cart.stitle}"),
+              subtitle: Text("${cart.srelease}"),
+              trailing: Text(
+                "price ${cart.sprice}",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
           ),
+          onDismissed: (direction) {
+            removercart(cart);
+          },
         );
       },
     );
@@ -64,5 +72,11 @@ class _CartPageState extends State<CartPage> {
       ),
       body: mainBody,
     );
+  }
+
+  Future<void> removercart(Cart cart) async {
+    var url = Uri.http(AppConfig.server, "Cart/${cart.id}");
+    var resp = await http.delete(url);
+    print(resp.body);
   }
 }

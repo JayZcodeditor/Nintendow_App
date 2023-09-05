@@ -311,12 +311,20 @@
       "id": 5
     },
     {
-      "stitle": "Pokémon™ Scarlet",
+      "stitle": "Monster Hunter Stories 2: Wings of Ruin",
+      "stype": "Adventure",
+      "sprice": "39.99",
+      "srelease": "July 9, 2021",
+      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000028503/39d22dad288b3e3dd75f63b7f757202d25fc10bcdd527192cbd19bcbbff7da64",
+      "id": 8
+    },
+    {
+      "stitle": "The Legend of Zelda™: Breath of the Wild",
       "stype": "Adventure",
       "sprice": "59.99",
-      "srelease": "November 18, 2022",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000053966/849c234de8df7265201d26d9d72f88eed3f32438d3dca12fc135beb4c3befc85",
-      "id": 6
+      "srelease": "March 3, 2017",
+      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58",
+      "id": 10
     }
   ]
 }
