@@ -295,36 +295,49 @@
   ],
   "Cart": [
     {
-      "stitle": "Fire Emblem Warriors: Three Hopes",
-      "stype": "Simulation",
-      "sprice": "59.99",
-      "srelease": "June 24, 2022",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000050778/fbcfc3d8329a53a3922652262d1eed43f81769867716d27047323835ec796603",
-      "id": 4
+      "stitle": "Metroid Prime™ Remastered",
+      "stype": "Adventure",
+      "sprice": 39.99,
+      "srelease": "February 8, 2023",
+      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000063709/32b85837beea0eee31220a59e247219662de4011f7a8c18fce61cf99a4933eb7",
+      "total": 1,
+      "id": 9
     },
     {
-      "stitle": "Pokémon™ Scarlet",
+      "stitle": "The Legend of Zelda™: Tears of the Kingdom",
       "stype": "Adventure",
-      "sprice": "59.99",
-      "srelease": "November 18, 2022",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000053966/849c234de8df7265201d26d9d72f88eed3f32438d3dca12fc135beb4c3befc85",
-      "id": 5
-    },
-    {
-      "stitle": "Monster Hunter Stories 2: Wings of Ruin",
-      "stype": "Adventure",
-      "sprice": "39.99",
-      "srelease": "July 9, 2021",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000028503/39d22dad288b3e3dd75f63b7f757202d25fc10bcdd527192cbd19bcbbff7da64",
-      "id": 8
-    },
-    {
-      "stitle": "The Legend of Zelda™: Breath of the Wild",
-      "stype": "Adventure",
-      "sprice": "59.99",
-      "srelease": "March 3, 2017",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58",
+      "sprice": 69.99,
+      "srelease": "May 12, 2023",
+      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000063714/276a412988e07c4d55a2996c6d38abb408b464413b2dfeb44d2aa460b9f622e1",
+      "total": 1,
       "id": 10
+    },
+    {
+      "stitle": "Nintendo Switch™ Sports",
+      "stype": "Sports",
+      "sprice": 39.99,
+      "srelease": "April 29, 2022",
+      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000049931/cf8adb2c74522b91412eb40b9d77216e8f8436fc4e63731e0dc262e6666930eb",
+      "total": 1,
+      "id": 11
+    },
+    {
+      "stitle": "Xenoblade Chronicles™ 3",
+      "stype": "Role-Playing",
+      "sprice": 59.99,
+      "srelease": "July 29, 2022",
+      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000053336/e933b48650b33b355e9cf2583da5c94b77180e40fb02d050041083dd62f4df39",
+      "total": 1,
+      "id": 12
+    },
+    {
+      "stitle": "Fire Emblem™ Engage",
+      "stype": "Role-Playing",
+      "sprice": 59.99,
+      "srelease": "January 20, 2023",
+      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000058802/88b8db494399e659522af36331b7f588439bc4312af5c0ee57035c063651ab4a",
+      "total": 1,
+      "id": 13
     }
   ]
 }

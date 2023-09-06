@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/cart.dart';
 import 'package:flutter_application_1/models/app_config.dart';
-import 'package:flutter_application_1/models/users.dart';
 import 'package:http/http.dart' as http;
 
 class CartPage extends StatefulWidget {
@@ -32,35 +31,62 @@ class _CartPageState extends State<CartPage> {
   }
 
   Widget showCart(List<Cart> _cartList) {
-    return ListView.builder(
-      itemCount: _cartList.length,
-      itemBuilder: (context, index) {
-        Cart cart = _cartList[index];
-        return Dismissible(
-          key: UniqueKey(),
-          direction: DismissDirection.endToStart,
-          background: Container(
-            color: Colors.red,
-            margin: EdgeInsets.symmetric(horizontal: 15),
-            alignment: Alignment.centerRight,
-            child: Icon(Icons.delete, color: Colors.white),
+    double pricetotal = 0.0;
+    for (Cart cart in _cartList) {
+      double subtotal = (cart.total ?? 1) * (cart.sprice ?? 0.0);
+      pricetotal += subtotal;
+    }
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: _cartList.length,
+            itemBuilder: (context, index) {
+              Cart cart = _cartList[index];
+              return Dismissible(
+                key: UniqueKey(),
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  color: Colors.red,
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  alignment: Alignment.centerRight,
+                  child: Icon(Icons.delete, color: Colors.white),
+                ),
+                child: Card(
+                  child: ListTile(
+                    leading: Image.network("${cart.spicture}"),
+                    title: Text("${cart.stitle}"),
+                    subtitle: Text("${cart.srelease}"),
+                    trailing: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Price \$${cart.sprice}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Count ${cart.total}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                onDismissed: (direction) {
+                  removercart(cart);
+                },
+              );
+            },
           ),
-          child: Card(
-            child: ListTile(
-              leading: Image.network("${cart.spicture}"),
-              title: Text("${cart.stitle}"),
-              subtitle: Text("${cart.srelease}"),
-              trailing: Text(
-                "price ${cart.sprice}",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          onDismissed: (direction) {
-            removercart(cart);
-          },
-        );
-      },
+        ),
+        Text(
+          'Total Price \$${pricetotal}',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 
@@ -78,5 +104,6 @@ class _CartPageState extends State<CartPage> {
     var url = Uri.http(AppConfig.server, "Cart/${cart.id}");
     var resp = await http.delete(url);
     print(resp.body);
+    await getCart();
   }
 }

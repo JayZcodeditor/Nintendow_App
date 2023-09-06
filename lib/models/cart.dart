@@ -11,41 +11,41 @@ String cartToJson(List<Cart> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Cart {
-  int? id;
   String? stitle;
-  String? sprice;
-  String? spicture;
-  String? srelease;
   String? stype;
+  double? sprice;
+  String? srelease;
+  String? spicture;
   int? total;
+  int? id;
 
   Cart({
-    this.id,
     this.stitle,
-    this.sprice,
-    this.spicture,
-    this.srelease,
     this.stype,
+    this.sprice,
+    this.srelease,
+    this.spicture,
     this.total,
+    this.id,
   });
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
-        id: json["id"],
         stitle: json["stitle"],
-        sprice: json["sprice"],
-        spicture: json["spicture"],
-        srelease: json["srelease"],
         stype: json["stype"],
+        sprice: json["sprice"]?.toDouble(),
+        srelease: json["srelease"],
+        spicture: json["spicture"],
         total: json["total"],
+        id: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "stitle": stitle,
-        "sprice": sprice,
-        "spicture": spicture,
-        "srelease": srelease,
         "stype": stype,
+        "sprice": sprice,
+        "srelease": srelease,
+        "spicture": spicture,
         "total": total,
+        "id": id,
       };
 }

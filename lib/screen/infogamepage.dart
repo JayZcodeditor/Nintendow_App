@@ -15,8 +15,8 @@ class InfoGamePage extends StatefulWidget {
 }
 
 class _InfoGamePageState extends State<InfoGamePage> {
-  Future<void> addgame(String title, String price, String picture, String type,
-      String release) async {
+  Future<void> addgame(String title, double price, String picture, String type,
+      String release, int total) async {
     var url = Uri.http(AppConfig.server, "Cart");
     Map<String, dynamic> gameData = {
       "stitle": title,
@@ -24,6 +24,7 @@ class _InfoGamePageState extends State<InfoGamePage> {
       "sprice": price,
       "srelease": release,
       "spicture": picture,
+      "total": total,
     };
     var resp = await http.post(url,
         headers: <String, String>{
@@ -41,86 +42,80 @@ class _InfoGamePageState extends State<InfoGamePage> {
   @override
   Widget build(BuildContext context) {
     final game = ModalRoute.of(context)!.settings.arguments as Games;
-
+    int total = 1;
+    double? price = game.price;
+    double defaultPrice = 0.0;
     var imgUrl = game.picture;
     imgUrl ??= "";
     return Scaffold(
       appBar: AppBar(
         title: Image.network(
           'https://cdn.freebiesupply.com/logos/large/2x/nintendo-2-logo-png-transparent.png',
-          height: 120, // Adjust the height as needed
+          height: 120,
         ),
       ),
       body: Container(
-        color: Colors.grey, // Set the background color here
+        color: Colors.grey,
         child: Center(
           child: SingleChildScrollView(
             child: Card(
-              elevation: 4, // You can adjust the elevation as needed.
-              margin: EdgeInsets.all(8), // You can adjust the margin as needed.
+              elevation: 4,
+              margin: EdgeInsets.all(8),
               child: Padding(
-                padding: const EdgeInsets.all(
-                    16.0), // You can adjust the padding as needed.
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment
-                      .start, // Align all elements to the left
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       '${game.title}',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
-                        height: 10), // Add some space between title and image
+                    SizedBox(height: 10),
                     Image.network(
                       imgUrl,
-                      height: 260, // Set the fixed height
+                      height: 260,
                     ),
-                    SizedBox(
-                        height: 20), // Add some space between image and type
+                    SizedBox(height: 20),
                     Text(
                       '${game.type}',
                       style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(
-                        height: 20), // Add some space between type and detail
+                    SizedBox(height: 20),
                     Text(
                       '${game.detail}',
                     ),
-                    SizedBox(
-                        height: 20), // Add some space between detail and price
+                    SizedBox(height: 20),
                     Text(
                       '\$${game.price}',
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
-                        height: 10), // Add some space between price and buttons
+                    SizedBox(height: 10),
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.start, // Align buttons to the left
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         ElevatedButton(
                           onPressed: () {
                             addgame(
                                 "${game.title}",
-                                "${game.price}",
+                                price ?? defaultPrice,
                                 "${game.picture}",
                                 "${game.type}",
-                                "${game.release}");
+                                "${game.release}",
+                                total);
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Added to Cart')),
                             );
                           },
                           child: Text('Add to Cart'),
                         ),
-                        SizedBox(width: 10), // Add some space between buttons
+                        SizedBox(width: 10),
                         ElevatedButton(
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('Buy Now')),
                             );
-                            // Add any additional logic for the "Buy Now" action here
                           },
                           style:
                               ElevatedButton.styleFrom(primary: Colors.green),
