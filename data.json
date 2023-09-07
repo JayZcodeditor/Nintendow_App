@@ -3,7 +3,25 @@
     {
       "id": 1,
       "email": "test@gmail.com",
-      "password": "1q2w3e4r"
+      "password": "1q2w3e4r",
+      "receipt": [
+        {
+          "Time": "07/09/2023 09:16:45",
+          "game": [
+            {
+              "title": "Monster Hunter Stories 2: Wings of Ruin",
+              "price": 39.99,
+              "count": 1
+            },
+            {
+              "title": "Metroid Prime™ Remastered",
+              "price": 39.99,
+              "count": 2
+            }
+          ],
+          "total": 119.7
+        }
+      ]
     },
     {
       "id": 2,
@@ -295,49 +313,107 @@
   ],
   "Cart": [
     {
-      "stitle": "Metroid Prime™ Remastered",
-      "stype": "Adventure",
-      "sprice": 39.99,
-      "srelease": "February 8, 2023",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000063709/32b85837beea0eee31220a59e247219662de4011f7a8c18fce61cf99a4933eb7",
+      "title": "Monster Hunter Stories 2: Wings of Ruin",
+      "type": "Adventure",
+      "release": "July 9, 2021",
+      "price": 39.99,
+      "picture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000028503/39d22dad288b3e3dd75f63b7f757202d25fc10bcdd527192cbd19bcbbff7da64",
       "total": 1,
-      "id": 9
+      "id": 1
     },
     {
-      "stitle": "The Legend of Zelda™: Tears of the Kingdom",
-      "stype": "Adventure",
-      "sprice": 69.99,
-      "srelease": "May 12, 2023",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000063714/276a412988e07c4d55a2996c6d38abb408b464413b2dfeb44d2aa460b9f622e1",
+      "title": "The Legend of Zelda™: Tears of the Kingdom",
+      "type": "Adventure",
+      "release": "May 12, 2023",
+      "price": 69.99,
+      "picture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000063714/276a412988e07c4d55a2996c6d38abb408b464413b2dfeb44d2aa460b9f622e1",
       "total": 1,
-      "id": 10
+      "id": 2
+    }
+  ],
+  "Receipt": [
+    {
+      "Time": "2023-09-07 23:15:20.867164",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 1
+        },
+        {
+          "title": "The Legend of Zelda™: Tears of the Kingdom",
+          "type": "Adventure",
+          "release": "May 12, 2023",
+          "price": 69.99,
+          "total": 1
+        },
+        {
+          "title": "The Legend of Zelda™: Tears of the Kingdom",
+          "type": "Adventure",
+          "release": "May 12, 2023",
+          "price": 69.99,
+          "total": 1
+        }
+      ],
+      "total": 179.96999999999997,
+      "UserId": "1",
+      "id": 1
     },
     {
-      "stitle": "Nintendo Switch™ Sports",
-      "stype": "Sports",
-      "sprice": 39.99,
-      "srelease": "April 29, 2022",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000049931/cf8adb2c74522b91412eb40b9d77216e8f8436fc4e63731e0dc262e6666930eb",
-      "total": 1,
-      "id": 11
+      "Time": "2023-09-07 23:15:36.417837",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 1
+        },
+        {
+          "title": "The Legend of Zelda™: Tears of the Kingdom",
+          "type": "Adventure",
+          "release": "May 12, 2023",
+          "price": 69.99,
+          "total": 1
+        },
+        {
+          "title": "The Legend of Zelda™: Tears of the Kingdom",
+          "type": "Adventure",
+          "release": "May 12, 2023",
+          "price": 69.99,
+          "total": 1
+        }
+      ],
+      "total": 179.96999999999997,
+      "UserId": "1",
+      "id": 2
     },
     {
-      "stitle": "Xenoblade Chronicles™ 3",
-      "stype": "Role-Playing",
-      "sprice": 59.99,
-      "srelease": "July 29, 2022",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000053336/e933b48650b33b355e9cf2583da5c94b77180e40fb02d050041083dd62f4df39",
-      "total": 1,
-      "id": 12
-    },
-    {
-      "stitle": "Fire Emblem™ Engage",
-      "stype": "Role-Playing",
-      "sprice": 59.99,
-      "srelease": "January 20, 2023",
-      "spicture": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000058802/88b8db494399e659522af36331b7f588439bc4312af5c0ee57035c063651ab4a",
-      "total": 1,
-      "id": 13
+      "Time": "2023-09-07 23:30:59.490448",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 1
+        },
+        {
+          "title": "The Legend of Zelda™: Tears of the Kingdom",
+          "type": "Adventure",
+          "release": "May 12, 2023",
+          "price": 69.99,
+          "total": 1
+        }
+      ],
+      "total": 109.97999999999999,
+      "UserId": "1",
+      "id": 3
     }
   ]
 }
