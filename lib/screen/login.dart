@@ -4,8 +4,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/models/app_config.dart';
 import 'package:flutter_application_1/models/users.dart';
-import 'package:flutter_application_1/screen/homepage.dart';
-import 'package:flutter_application_1/screen/cartpage.dart';
 import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
