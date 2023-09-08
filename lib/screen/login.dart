@@ -173,7 +173,8 @@ class _LoginState extends State<Login> {
             ),
           );
         }
-      };
+      }
+      ;
     } catch (e) {
       // Handle other errors, such as network errors
       ScaffoldMessenger.of(context).showSnackBar(

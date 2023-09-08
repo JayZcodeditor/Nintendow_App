@@ -20,8 +20,7 @@ class _MyAppState extends State<MyApp> {
 
   void _login(int? userId) {
     setState(() {
-      _isLoggedIn =
-          userId != null; // Set _isLoggedIn to true if userId is not null
+      _isLoggedIn = userId != null;
       _userId = userId;
       print(userId);
     });

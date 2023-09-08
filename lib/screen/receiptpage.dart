@@ -6,25 +6,25 @@ import 'package:http/http.dart' as http;
 class ReceiptPage extends StatefulWidget {
   static const routeName = "/receipt";
   final int? userId;
-    const ReceiptPage({Key? key, this.userId}) : super(key: key);
-  
+  const ReceiptPage({Key? key, this.userId}) : super(key: key);
+
   @override
   _ReceiptPageState createState() => _ReceiptPageState();
 }
 
 class _ReceiptPageState extends State<ReceiptPage> {
   int? userId;
-  List<Map<String, dynamic>> _receiptlist = [];
+  List<Receipt> _receiptlist = [];
   Widget mainBody = Container();
 
-@override
+  @override
   void initState() {
     super.initState();
     userId = widget.userId;
-    print(userId); // Set _userId from widget property
-      // Now you can use _userId in other methods or widgets as needed.
- 
+    print(userId);
+    getReceipt(userId!);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,71 +35,63 @@ class _ReceiptPageState extends State<ReceiptPage> {
     );
   }
 
-Future<void> getReceipt(int userId) async {
-  try {
-    var url = Uri.http(AppConfig.server, "Receipt");
-    var resp = await http.get(url);
-    print(resp.body);
-    if (resp.statusCode == 200) {
-      setState(() {
-        _receiptlist = receiptFromJson(resp.body)
-            // .where((receipt) => receipt.userId = userId)
-            .toList(); // Filter receipts by userId
-        mainBody = showreceipt(_receiptlist);
-      });
-    } else {
-      // Handle HTTP request errors here
-      // You can display an error message to the user
-    }
-  } catch (e) {
-    // Handle exceptions here
-    // You can display an error message to the user
+  Future<void> getReceipt(int userId) async {
+    try {
+      var url = Uri.http(AppConfig.server, "Receipt");
+      var resp = await http.get(url);
+      print(resp.body);
+      if (resp.statusCode == 200) {
+        setState(() {
+          _receiptlist = receiptFromJson(resp.body).toList();
+          mainBody = showreceipt(_receiptlist, userId);
+        });
+      } else {}
+    } catch (e) {}
   }
-}
 
+  Widget showreceipt(List<Receipt> _receiptList, int userId) {
+    final filteredReceipts =
+        _receiptList.where((receipt) => receipt.userId == userId).toList();
 
-Widget showreceipt(List<Map<String, dynamic>> receiptList) {
-// Store the userId in the state
-  return ListView.builder(
-    itemCount: receiptList.length,
-    itemBuilder: (context, index) {
-      final receipt = receiptList[index];
-      final dateTime = DateTime.parse(receipt['Time'] as String);
+    return ListView.builder(
+      itemCount: filteredReceipts.length,
+      itemBuilder: (context, index) {
+        final receipt = filteredReceipts[index];
+        final dateTime = receipt.time;
+        final games = receipt.game;
 
-      return Card(
-        margin: EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListTile(
-              title: Text('Date and Time: ${dateTime.toString()}'),
-              subtitle: Text('Total: \$${receipt['total']}'),
-            ),
-            SizedBox(height: 10.0),
-            Text('Games:'),
-            Column(
-              children: (receipt['game'] as List<Map<String, dynamic>>)
-                  .map(
-                    (game) => ListTile(
-                      title: Text('Title: ${receipt['title']}'),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Type: ${receipt['type']}'),
-                          Text('Release: ${receipt['release']}'),
-                          Text('Price: \$${receipt['price']}'),
-                          Text('Total: ${receipt['total']}'),
-                        ],
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-
+        return Card(
+          margin: EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListTile(
+                title: Text('Date and Time: ${dateTime.toString()}'),
+                subtitle: Text('Total: ${receipt.total}'),
+              ),
+              SizedBox(height: 10.0),
+              Text('Games:'),
+              Column(
+                children: games?.map((game) {
+                      return ListTile(
+                        title: Text('Title: ${game.title}'),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Type: ${game.type}'),
+                            Text('Release: ${game.release}'),
+                            Text('Price: \$${game.price}'),
+                            Text('Total: ${game.total}'),
+                          ],
+                        ),
+                      );
+                    }).toList() ??
+                    [],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
