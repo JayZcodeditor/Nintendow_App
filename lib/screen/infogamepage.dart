@@ -79,7 +79,11 @@ class _InfoGamePageState extends State<InfoGamePage> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      '${game.type}',
+                      'Release: ${game.release}',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Text(
+                      'Type: ${game.type}',
                       style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(height: 20),
@@ -109,6 +113,8 @@ class _InfoGamePageState extends State<InfoGamePage> {
                               SnackBar(content: Text('Added to Cart')),
                             );
                           },
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(255, 216, 29, 29)),
                           child: Text('Add to Cart'),
                         ),
                         SizedBox(width: 10),
@@ -118,8 +124,9 @@ class _InfoGamePageState extends State<InfoGamePage> {
                               SnackBar(content: Text('Buy Now')),
                             );
                           },
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.green),
+                          style: ElevatedButton.styleFrom(
+                              primary:
+                                  const Color.fromARGB(255, 134, 134, 134)),
                           child: Text('Buy Now'),
                         ),
                       ],

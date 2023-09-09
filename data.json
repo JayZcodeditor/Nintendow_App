@@ -338,6 +338,370 @@
       ],
       "total": 99.98,
       "id": 2
+    },
+    {
+      "Time": "2023-09-09 17:05:24.090278",
+      "userId": 1,
+      "game": [
+        {
+          "title": "DRAGON QUEST BUILDERS™ 2",
+          "type": "Role-Playing",
+          "release": "July 12, 2019",
+          "price": 49.99,
+          "total": 1
+        },
+        {
+          "title": "EA SPORTS FIFA 23 Nintendo Switch™ Legacy Edition",
+          "type": "Sports",
+          "release": "September 30, 2022",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 89.98,
+      "id": 3
+    },
+    {
+      "Time": "2023-09-09 17:05:38.616174",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 4
+    },
+    {
+      "Time": "2023-09-09 17:24:30.838701",
+      "userId": 1,
+      "game": [
+        {
+          "title": "The Legend of Zelda™: Tears of the Kingdom",
+          "type": "Adventure",
+          "release": "May 12, 2023",
+          "price": 69.99,
+          "total": 1
+        },
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 109.97999999999999,
+      "id": 5
+    },
+    {
+      "Time": "2023-09-09 18:25:55.646009",
+      "userId": 1,
+      "game": [
+        {
+          "title": "The Legend of Zelda™: Tears of the Kingdom",
+          "type": "Adventure",
+          "release": "May 12, 2023",
+          "price": 69.99,
+          "total": 1
+        }
+      ],
+      "total": 69.99,
+      "id": 6
+    },
+    {
+      "Time": "2023-09-09 18:32:09.055806",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 7
+    },
+    {
+      "Time": "2023-09-09 18:34:00.169555",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 8
+    },
+    {
+      "Time": "2023-09-09 18:35:12.583556",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 9
+    },
+    {
+      "Time": "2023-09-09 18:38:54.749497",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 10
+    },
+    {
+      "Time": "2023-09-09 18:40:16.455147",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 11
+    },
+    {
+      "Time": "2023-09-09 18:40:52.745486",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 12
+    },
+    {
+      "Time": "2023-09-09 18:41:36.692958",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 13
+    },
+    {
+      "Time": "2023-09-09 18:44:33.105580",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 14
+    },
+    {
+      "Time": "2023-09-09 18:45:08.275329",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Metroid Prime™ Remastered",
+          "type": "Adventure",
+          "release": "February 8, 2023",
+          "price": 39.99,
+          "total": 1
+        }
+      ],
+      "total": 39.99,
+      "id": 15
+    },
+    {
+      "Time": "2023-09-09 18:46:03.301882",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Pokémon™ Scarlet",
+          "type": "Adventure",
+          "release": "November 18, 2022",
+          "price": 59.99,
+          "total": 1
+        }
+      ],
+      "total": 59.99,
+      "id": 16
+    },
+    {
+      "Time": "2023-09-09 18:46:38.890337",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Super Smash Bros.™ Ultimate",
+          "type": "Fighting",
+          "release": "December 7, 2018",
+          "price": 59.99,
+          "total": 1
+        }
+      ],
+      "total": 59.99,
+      "id": 17
+    },
+    {
+      "Time": "2023-09-09 18:47:38.417983",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Phoenix Wright: Ace Attorney Trilogy",
+          "type": "Simulation",
+          "release": "April 9, 2019",
+          "price": 29.99,
+          "total": 1
+        }
+      ],
+      "total": 29.99,
+      "id": 18
+    },
+    {
+      "Time": "2023-09-09 18:51:49.940455",
+      "userId": 3,
+      "game": [
+        {
+          "title": "AnimalCrossing",
+          "type": "Simulation",
+          "release": "March 20, 2020",
+          "price": 59.99,
+          "total": 1
+        }
+      ],
+      "total": 59.99,
+      "id": 19
+    },
+    {
+      "Time": "2023-09-09 18:52:05.929649",
+      "userId": 3,
+      "game": [
+        {
+          "title": "Pokémon™ Scarlet",
+          "type": "Adventure",
+          "release": "November 18, 2022",
+          "price": 59.99,
+          "total": 5
+        },
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 2
+        },
+        {
+          "title": "EA SPORTS FIFA 23 Nintendo Switch™ Legacy Edition",
+          "type": "Sports",
+          "release": "September 30, 2022",
+          "price": 39.99,
+          "total": 2
+        }
+      ],
+      "total": 459.91,
+      "id": 20
+    },
+    {
+      "Time": "2023-09-09 18:52:34.982849",
+      "userId": 3,
+      "game": [
+        {
+          "title": "Pokémon™ Scarlet",
+          "type": "Adventure",
+          "release": "November 18, 2022",
+          "price": 59.99,
+          "total": 7
+        }
+      ],
+      "total": 419.93,
+      "id": 21
+    },
+    {
+      "Time": "2023-09-09 19:19:15.662922",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Hyrule Warriors: Age of Calamity",
+          "type": "Fighting",
+          "release": "November 20, 2020",
+          "price": 59.99,
+          "total": 1
+        },
+        {
+          "title": "Hyrule Warriors: Age of Calamity",
+          "type": "Fighting",
+          "release": "November 20, 2020",
+          "price": 59.99,
+          "total": 1
+        }
+      ],
+      "total": 119.98,
+      "id": 22
+    },
+    {
+      "Time": "2023-09-09 19:19:35.160638",
+      "userId": 1,
+      "game": [
+        {
+          "title": "Monster Hunter Stories 2: Wings of Ruin",
+          "type": "Adventure",
+          "release": "July 9, 2021",
+          "price": 39.99,
+          "total": 5
+        },
+        {
+          "title": "Splatoon™ 3",
+          "type": "Multiplayer",
+          "release": "September 9, 2022",
+          "price": 59.99,
+          "total": 1
+        },
+        {
+          "title": "Mario Party™ Superstars",
+          "type": "Multiplayer",
+          "release": "October 29, 2021",
+          "price": 59.99,
+          "total": 1
+        }
+      ],
+      "total": 319.93,
+      "id": 23
     }
   ]
 }

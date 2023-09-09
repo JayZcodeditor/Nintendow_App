@@ -46,8 +46,8 @@ class _CartPageState extends State<CartPage> {
     }
     return Column(
       children: [
-                SizedBox(height: 15.0),
-         Center(
+        SizedBox(height: 15.0),
+        Center(
           child: Text(
             'Cart list',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -218,7 +218,9 @@ class _CartPageState extends State<CartPage> {
           ],
         ),
         submitButton(userId), // You can add your submit button here
-        SizedBox(height: 15,)
+        SizedBox(
+          height: 15,
+        )
       ],
     );
   }
@@ -315,7 +317,6 @@ class _CartPageState extends State<CartPage> {
         width: 200.0,
         child: ElevatedButton(
           onPressed: () {
-            // Pass the required data as parameters to the savereceipt function
             saveReceipt(userId);
           },
           style: ElevatedButton.styleFrom(
@@ -327,6 +328,53 @@ class _CartPageState extends State<CartPage> {
           child: Text("Purchase"),
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Text(
+                'Thank you ',
+                style: TextStyle(
+                  fontSize: 18, // ขนาดของข้อความ
+                  fontWeight: FontWeight.bold, // หนา (อักษรหนา)
+                ),
+              ),
+              Icon(
+                Icons.check,
+                size: 30, // ขนาดของไอคอน
+                color: Color.fromARGB(255, 68, 255, 0), // สีของไอคอน
+              ),
+              SizedBox(width: 8), // ระยะห่างระหว่างไอคอนและข้อความ
+            ],
+          ),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'You can view your purchase history on the receipt page.',
+                  style: TextStyle(
+                      fontSize: 14, color: Color.fromARGB(255, 82, 82, 82)),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -378,11 +426,9 @@ class _CartPageState extends State<CartPage> {
                 },
               );
               if (deleteResp.statusCode == 200) {
+                _showMyDialog();
                 getCart();
-              } else {
-                // Handle the HTTP request error for cart deletion
-                // You can display an error message to the user
-              }
+              } else {}
             }
           } else {
             // Handle the HTTP request error for receipt creation

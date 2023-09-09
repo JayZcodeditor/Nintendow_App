@@ -9,7 +9,8 @@ class Home extends StatefulWidget {
   static const String routeName = "/home"; // Corrected routeName type to String
   final int? userId;
 
-  const Home({Key? key, this.userId}) : super(key: key); // Added userId parameter to the constructor
+  const Home({Key? key, this.userId})
+      : super(key: key); // Added userId parameter to the constructor
 
   @override
   _HomeState createState() => _HomeState();
@@ -77,11 +78,11 @@ class _HomeState extends State<Home> {
     );
   }
 
-@override
-void initState() {
-  super.initState();
-  getGames(); // Fetch the games
-}
+  @override
+  void initState() {
+    super.initState();
+    getGames(); // Fetch the games
+  }
 
   Widget showGames(List<Games> _gamelist) {
     final filteredGames = selectedGenre == null
